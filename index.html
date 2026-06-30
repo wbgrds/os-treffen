@@ -5,6 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Olaf Scharfenberg - WEBGUARDS</title>
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+      }
+      .modal.open {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-content {
+        position: relative;
+        width: 90%;
+        height: 90%;
+        max-width: 800px;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #333;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        z-index: 10000;
+      }
+      .modal-close:hover {
+        background: #000;
+      }
+      .modal iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      .btn-termin {
+        background-color: #039BE5;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .btn-termin:hover {
+        background-color: #0288d1;
+      }
+    </style>
   </head>
   <body>
     <nav>
@@ -14,6 +74,7 @@
           <a href="https://1018.3cx.cloud/callus/#olaf" target="_blank" rel="noopener">
             Kontakt
           </a>
+          <button class="btn-termin" onclick="openModal()">Termin</button>
         </div>
       </div>
     </nav>
@@ -23,6 +84,7 @@
         <div class="header-text">
           <h1>Olaf Scharfenberg</h1>
           <p>IT-Techniker & Gründer</p>
+          <button class="btn-termin" onclick="openModal()" style="padding: 12px 24px; font-size: 16px;">Rückruf vereinbaren</button>
         </div>
         <div class="header-image">
           <img src="olafscharfenberg.png" alt="Olaf Scharfenberg" />
@@ -45,10 +107,30 @@
         <a href="https://1018.3cx.cloud/callus/#olaf" target="_blank" rel="noopener">
           Kontakt
         </a>
-        <a href="https://cal.com/wbgrds/hotline" target="_blank" rel="noopener">
-          Termin
-        </a>
+        <button class="btn-termin" onclick="openModal()">Kalender</button>
       </div>
     </footer>
+
+    <!-- Modal Overlay -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <iframe src="https://cal.com/wbgrds/hotline" title="Termin vereinbaren"></iframe>
+      </div>
+    </div>
+
+    <script>
+      function openModal() {
+        document.getElementById('modal').classList.add('open');
+      }
+      function closeModal() {
+        document.getElementById('modal').classList.remove('open');
+      }
+      document.getElementById('modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeModal();
+        }
+      });
+    </script>
   </body>
 </html>
