@@ -24,7 +24,6 @@
         <div class="header-text">
           <h1>Olaf Scharfenberg</h1>
           <p>IT-Techniker & Gründer</p>
-          <div id="cal-header"></div>
         </div>
         <div class="header-image">
           <img src="olafscharfenberg.png" alt="Olaf Scharfenberg" />
@@ -49,28 +48,21 @@
         </a>
       </div>
       <div id="cal"></div>
-      <p id="debug" style="color: red; font-size: 12px;"></p>
     </footer>
 
-    <!-- Google Calendar Appointment Scheduling -->
-    <script src="includes/plugins/google/scheduling-button-script.js" defer></script>
-
+    <script src="includes/plugins/google/scheduling-button-script.js"></script>
     <script>
-      window.addEventListener('load', function() {
-        const debug = document.getElementById('debug');
-        debug.textContent = 'window.calendar: ' + (window.calendar ? 'EXISTS' : 'MISSING');
-        
-        if (window.calendar && window.calendar.schedulingButton) {
-          debug.textContent += ' | schedulingButton: EXISTS';
-          window.calendar.schedulingButton.load({
-            target: document.getElementById('cal'),
-            url: 'https://cal.com/wbgrds/hotline',
-            label: 'Termin',
-            color: '#039BE5'
-          });
-        } else {
-          debug.textContent += ' | schedulingButton: MISSING';
-        }
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          if (window.calendar && window.calendar.schedulingButton) {
+            window.calendar.schedulingButton.load({
+              target: document.getElementById('cal'),
+              url: 'https://cal.com/wbgrds/hotline',
+              label: 'Termin',
+              color: '#039BE5'
+            });
+          }
+        }, 500);
       });
     </script>
   </body>
